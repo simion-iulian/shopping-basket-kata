@@ -17,5 +17,7 @@ public class ShoppingBasketService {
     basket.add(new BasketLine(product.productId, product.name, product.price, quantity));
     basketRepository.save(basket);
   }
-  public Basket basketFor(UserID userId) { throw new UnsupportedOperationException();}
+  public Basket basketFor(UserID userId) {
+    return basketRepository.getByUserId(userId);
+  }
 }

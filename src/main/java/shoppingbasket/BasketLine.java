@@ -4,9 +4,9 @@ import java.util.Objects;
 
 public class BasketLine {
   private final ProductID productId;
-  private final String name;
-  private final int price;
-  private final int quantity;
+  public final String name;
+  public final int price;
+  public final int quantity;
 
   public BasketLine(ProductID productId, String name, int price, int quantity) {
     this.productId = productId;

@@ -1,13 +1,12 @@
 package shoppingbasket.test;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
 import shoppingbasket.Basket;
-import shoppingbasket.BasketRepository;
 import shoppingbasket.BasketLine;
+import shoppingbasket.BasketRepository;
 import shoppingbasket.Clock;
 import shoppingbasket.Product;
 import shoppingbasket.ProductID;
@@ -15,6 +14,7 @@ import shoppingbasket.ProductRepository;
 import shoppingbasket.ShoppingBasketService;
 import shoppingbasket.UserID;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -48,4 +48,21 @@ class ShoppingBasketServiceShould {
 
     verify(basketRepository).save(basket);
   }
+
+  @Test
+  public void
+  get_basket_with_one_item_added() {
+    when(basketRepository.getByUserId(userId)).thenReturn(getRandomBasket(userId));
+
+    Basket actualBasket = service.basketFor(userId);
+
+    Basket expectedBasket = getRandomBasket(userId);
+
+    assertThat(actualBasket, is(expectedBasket));
+  }
+
+  private Basket getRandomBasket(UserID userId) {
+    return new Basket(userId, LocalDate.now());
+  }
+
 }

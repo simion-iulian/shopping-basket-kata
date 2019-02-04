@@ -1,9 +1,13 @@
 package shoppingbasket;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+
+import static java.lang.System.*;
 
 public class Basket {
   public final UserID userId;
@@ -17,7 +21,12 @@ public class Basket {
   }
 
   public String printContents() {
-      throw new UnsupportedOperationException();
+    final String lineWithDate = date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))+ lineSeparator();
+    String productLines = basketLines.stream().map(b -> String.format("%d x %s",b.quantity,b.name)).collect(Collectors.joining(lineSeparator())) + lineSeparator();
+
+    int total = basketLines.stream().mapToInt(b -> b.price*b.quantity).sum();
+    String totalLine = String.format("Total: £%d.00",total)+ lineSeparator();
+    return lineWithDate + productLines + totalLine;
   }
 
   public void add(BasketLine basketLine) {
