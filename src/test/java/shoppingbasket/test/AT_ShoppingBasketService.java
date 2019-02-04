@@ -2,6 +2,8 @@ package shoppingbasket.test;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Collections;
+
 import shoppingbasket.Basket;
 import shoppingbasket.BasketRepository;
 import shoppingbasket.Clock;
@@ -20,7 +22,7 @@ class AT_ShoppingBasketService {
   @Test
   public void
   display_contents_of_a_basket() {
-    ShoppingBasketService basketService = new ShoppingBasketService(new Clock(), new ProductRepository(), new BasketRepository());
+    ShoppingBasketService basketService = new ShoppingBasketService(new Clock(), new ProductRepository(Collections.emptyList()), new BasketRepository());
 
     final UserID userId = new UserID("1234");
     final ProductID hobbitId = new ProductID("10002");
