@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class Basket {
-  private final UserID userId;
+  public final UserID userId;
   private final LocalDate date;
   private final List<BasketLine> basketLines;
 
