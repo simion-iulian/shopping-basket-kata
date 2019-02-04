@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BasketRepository {
-  List<Basket> baskets = new ArrayList<>();
+  private List<Basket> baskets = new ArrayList<>();
 
   public void save(Basket basket) {
     baskets.add(basket);

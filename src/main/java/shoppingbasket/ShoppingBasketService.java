@@ -1,5 +1,7 @@
 package shoppingbasket;
 
+import java.util.Optional;
+
 public class ShoppingBasketService {
   private final Clock clock;
   private final ProductRepository productRepository;
@@ -13,7 +15,9 @@ public class ShoppingBasketService {
 
   public void addItem(UserID userId, ProductID productId, int quantity) {
     Product product = productRepository.getById(productId);
-    Basket basket = new Basket(userId, clock.now());
+    Basket basket =
+      Optional.ofNullable(basketRepository.getByUserId(userId))
+      .orElse(new Basket(userId, clock.now()));
     basket.add(new BasketLine(product.productId, product.name, product.price, quantity));
     basketRepository.save(basket);
   }

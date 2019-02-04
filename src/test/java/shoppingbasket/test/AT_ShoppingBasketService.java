@@ -2,6 +2,7 @@ package shoppingbasket.test;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 
@@ -16,6 +17,8 @@ import shoppingbasket.UserID;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class AT_ShoppingBasketService {
 
@@ -34,7 +37,9 @@ class AT_ShoppingBasketService {
 
     final ProductRepository productRepository = new ProductRepository(productSeed);
     final BasketRepository basketRepository = new BasketRepository();
-    final Clock clock = new Clock();
+
+    final Clock clock = mock(Clock.class);
+    when(clock.now()).thenReturn(LocalDate.of(2018,10,21));
 
     ShoppingBasketService basketService = new ShoppingBasketService(clock, productRepository, basketRepository);
 
