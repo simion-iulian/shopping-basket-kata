@@ -1,6 +1,7 @@
 package shoppingbasket;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 import shoppingbasket.basket.Basket;
@@ -13,11 +14,13 @@ import shoppingbasket.user.UserID;
 import shoppingbasket.utils.Clock;
 
 public class ShoppingBasketService {
+  private final Console console;
   private final Clock clock;
   private final ProductRepository productRepository;
   private final BasketRepository basketRepository;
 
   public ShoppingBasketService(Console console, Clock clock, ProductRepository productRepository, BasketRepository basketRepository) {
+    this.console = console;
     this.clock = clock;
     this.productRepository = productRepository;
     this.basketRepository = basketRepository;
@@ -30,16 +33,21 @@ public class ShoppingBasketService {
 
     basket.add(basketLine);
     basketRepository.save(basket);
-    final String itemConsoleLine =
-      String.format("[ITEM ADDED TO SHOPPING CART]: " +
-        "Added[<2018-07-12>], User[], Product[%s], Quantity[%d], Price[<£%d.00>]", productId, quantity, product.price);
-    System.out.println(itemConsoleLine);
+    console.print(productToConsole(productId, quantity, product));
+  }
+
+  private String productToConsole(ProductID productId, int quantity, Product product) {
+    return String.format("[ITEM ADDED TO SHOPPING CART]: " +
+      "Added[<2018-07-12>], User[], Product[%s], Quantity[%d], Price[<£%d.00>]", productId, quantity, product.price);
   }
 
   private Basket getBasket(UserID userId) {
     if (basketFor(userId) == null) {
       final LocalDate now = clock.now();
-      System.out.println("[BASKET CREATED]: Created [<2018-07-12>], User[]");
+      String date = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+      String creationConsoleLine = String.format("[BASKET CREATED]: Created [<%s>], User[]", date);
+
+      console.print(creationConsoleLine);
       return new Basket(userId, now);
     } else {
       return basketFor(userId);
