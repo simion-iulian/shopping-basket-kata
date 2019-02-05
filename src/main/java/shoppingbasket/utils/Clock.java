@@ -1,4 +1,4 @@
-package shoppingbasket;
+package shoppingbasket.utils;
 
 import java.time.LocalDate;
 

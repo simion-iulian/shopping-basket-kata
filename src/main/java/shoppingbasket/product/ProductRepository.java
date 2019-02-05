@@ -1,4 +1,4 @@
-package shoppingbasket;
+package shoppingbasket.product;
 
 import java.util.List;
 
@@ -6,7 +6,6 @@ public class ProductRepository {
   private final List<Product> expectedProduct;
 
   public ProductRepository(List<Product> expectedProduct) {
-
     this.expectedProduct = expectedProduct;
   }
 

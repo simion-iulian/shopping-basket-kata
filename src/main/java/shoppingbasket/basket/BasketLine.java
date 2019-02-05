@@ -1,12 +1,14 @@
-package shoppingbasket;
+package shoppingbasket.basket;
 
 import java.util.Objects;
 
+import shoppingbasket.product.ProductID;
+
 public class BasketLine {
   private final ProductID productId;
-  public final String name;
-  public final int price;
-  public final int quantity;
+  final String name;
+  final int price;
+  final int quantity;
 
   public BasketLine(ProductID productId, String name, int price, int quantity) {
     this.productId = productId;

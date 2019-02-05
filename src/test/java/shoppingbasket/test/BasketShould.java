@@ -4,10 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
-import shoppingbasket.Basket;
-import shoppingbasket.BasketLine;
-import shoppingbasket.ProductID;
-import shoppingbasket.UserID;
+import shoppingbasket.basket.Basket;
+import shoppingbasket.basket.BasketLine;
+import shoppingbasket.product.ProductID;
+import shoppingbasket.user.UserID;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;

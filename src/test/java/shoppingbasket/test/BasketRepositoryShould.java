@@ -4,14 +4,12 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
-import shoppingbasket.Basket;
-import shoppingbasket.BasketRepository;
-import shoppingbasket.Clock;
-import shoppingbasket.UserID;
+import shoppingbasket.basket.Basket;
+import shoppingbasket.basket.BasketRepository;
+import shoppingbasket.user.UserID;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class BasketRepositoryShould {
   @Test

@@ -4,15 +4,15 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
-import shoppingbasket.Basket;
-import shoppingbasket.BasketLine;
-import shoppingbasket.BasketRepository;
-import shoppingbasket.Clock;
-import shoppingbasket.Product;
-import shoppingbasket.ProductID;
-import shoppingbasket.ProductRepository;
+import shoppingbasket.basket.Basket;
+import shoppingbasket.basket.BasketLine;
+import shoppingbasket.basket.BasketRepository;
+import shoppingbasket.utils.Clock;
+import shoppingbasket.product.Product;
+import shoppingbasket.product.ProductID;
+import shoppingbasket.product.ProductRepository;
 import shoppingbasket.ShoppingBasketService;
-import shoppingbasket.UserID;
+import shoppingbasket.user.UserID;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;

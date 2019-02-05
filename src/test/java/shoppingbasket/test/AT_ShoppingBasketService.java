@@ -3,17 +3,16 @@ package shoppingbasket.test;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.List;
 
-import shoppingbasket.Basket;
-import shoppingbasket.BasketRepository;
-import shoppingbasket.Clock;
-import shoppingbasket.Product;
-import shoppingbasket.ProductID;
-import shoppingbasket.ProductRepository;
+import shoppingbasket.basket.Basket;
+import shoppingbasket.basket.BasketRepository;
+import shoppingbasket.utils.Clock;
+import shoppingbasket.product.Product;
+import shoppingbasket.product.ProductID;
+import shoppingbasket.product.ProductRepository;
 import shoppingbasket.ShoppingBasketService;
-import shoppingbasket.UserID;
+import shoppingbasket.user.UserID;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -21,25 +20,21 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class AT_ShoppingBasketService {
-
-
+  private final UserID userId = new UserID("1234");
+  private final ProductID hobbitId = new ProductID("10002");
+  private final ProductID breakingBadId = new ProductID("20110");
+  private final List<Product> productSeed = List.of(
+    new Product(hobbitId, "The Hobbit", 5),
+    new Product(breakingBadId, "Breaking Bad", 7)
+  );
+  private final ProductRepository productRepository = new ProductRepository(productSeed);
+  private final BasketRepository basketRepository = new BasketRepository();
+  private final Clock clock = mock(Clock.class);
 
   @Test
   public void
   display_contents_of_a_basket() {
-    final UserID userId = new UserID("1234");
-    final ProductID hobbitId = new ProductID("10002");
-    final ProductID breakingBadId = new ProductID("20110");
-    final List<Product> productSeed = List.of(
-      new Product(hobbitId, "The Hobbit", 5),
-      new Product(breakingBadId, "Breaking Bad", 7)
-    );
-
-    final ProductRepository productRepository = new ProductRepository(productSeed);
-    final BasketRepository basketRepository = new BasketRepository();
-
-    final Clock clock = mock(Clock.class);
-    when(clock.now()).thenReturn(LocalDate.of(2018,10,21));
+    when(clock.now()).thenReturn(LocalDate.of(2018, 10, 21));
 
     ShoppingBasketService basketService = new ShoppingBasketService(clock, productRepository, basketRepository);
 

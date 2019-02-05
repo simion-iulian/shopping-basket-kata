@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import shoppingbasket.Product;
-import shoppingbasket.ProductID;
-import shoppingbasket.ProductRepository;
+import shoppingbasket.product.Product;
+import shoppingbasket.product.ProductID;
+import shoppingbasket.product.ProductRepository;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
