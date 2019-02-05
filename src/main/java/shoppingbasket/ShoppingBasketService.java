@@ -36,16 +36,10 @@ public class ShoppingBasketService {
     console.print(productToConsole(productId, quantity, product));
   }
 
-  private String productToConsole(ProductID productId, int quantity, Product product) {
-    return String.format("[ITEM ADDED TO SHOPPING CART]: " +
-      "Added[<2018-07-12>], User[], Product[%s], Quantity[%d], Price[<£%d.00>]", productId, quantity, product.price);
-  }
-
   private Basket getBasket(UserID userId) {
     if (basketFor(userId) == null) {
       final LocalDate now = clock.now();
-      String date = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-      String creationConsoleLine = String.format("[BASKET CREATED]: Created [<%s>], User[]", date);
+      String creationConsoleLine = getCreationConsoleLine(now);
 
       console.print(creationConsoleLine);
       return new Basket(userId, now);
@@ -56,5 +50,14 @@ public class ShoppingBasketService {
 
   public Basket basketFor(UserID userId) {
     return basketRepository.getByUserId(userId);
+  }
+
+  private String getCreationConsoleLine(LocalDate now) {
+    return String.format("[BASKET CREATED]: Created [<%s>], User[]", now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+  }
+
+  private String productToConsole(ProductID productId, int quantity, Product product) {
+    return String.format("[ITEM ADDED TO SHOPPING CART]: " +
+      "Added[<2018-07-12>], User[], Product[%s], Quantity[%d], Price[<£%d.00>]", productId, quantity, product.price);
   }
 }
