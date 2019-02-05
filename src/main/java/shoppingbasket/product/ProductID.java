@@ -6,4 +6,9 @@ public class ProductID {
   public ProductID(String id) {
     this.id = id;
   }
+
+  @Override
+  public String toString() {
+    return id;
+  }
 }

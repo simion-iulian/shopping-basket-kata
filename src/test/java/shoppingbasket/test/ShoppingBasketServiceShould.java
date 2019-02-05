@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
+import shoppingbasket.Console;
 import shoppingbasket.basket.Basket;
 import shoppingbasket.basket.BasketLine;
 import shoppingbasket.basket.BasketRepository;
@@ -30,7 +31,7 @@ class ShoppingBasketServiceShould {
   private final Clock clock = mock(Clock.class);
   private final ProductRepository productRepository = mock(ProductRepository.class);
   private final BasketRepository basketRepository = mock(BasketRepository.class);
-  private final ShoppingBasketService service = new ShoppingBasketService(clock, productRepository, basketRepository);
+  private final ShoppingBasketService service = new ShoppingBasketService(new Console(), clock, productRepository, basketRepository);
 
 
   @Test
@@ -95,7 +96,6 @@ class ShoppingBasketServiceShould {
 
     verify(basketRepository).save(basketWithTwoItems);
   }
-
 
   private Basket getRandomBasket(UserID userId) {
     return new Basket(userId, LocalDate.now());
